@@ -4,8 +4,49 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<header>
-    <h1>This is the homepage</h1>
-</header>
+<div>
+    <div class="hero-content">
+        <h1>Unleashing Creativity with the Best Tools</h1>
+        <p>Your guide to photography, videography, and blogging essentials.</p>
+        <a href="#explore">Explore Now</a>
+    </div>
+    <div class="bg-image">
+        <div class="carousel-container">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static '/images/rs_sony_fx.jpg' %}" class="d-block w-100 img-fluid" alt="sony fx camera">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p>Sony FX.</p>
+                            <a href="https://www.youtube.com/watch?v=8XVGA5lmBoc" target="_blank" rel="noopener">Watch the video in my YouTube Channel</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/rs_iso_shutter.jpg' %}" class="d-block w-100 img-fluid" alt="ISO Shutter Speed Aputure">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p>How to control your ISO shutter speed aputure from DJI.</p>
+                            <a href="https://www.youtube.com/watch?v=q3Buqq6L7LM" target="_blank" rel="noopener">Watch the video in my YouTube Channel</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="{% static 'images/rs_tripod_img.jpg' %}" class="d-block w-100 img-fluid" alt="tripod">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p>The only Tripod you need.</p>
+                            <a href="https://www.youtube.com/watch?v=7r5MxNQSAlM" target="_blank" rel="noopener">Watch the video in my YouTube Channel</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
