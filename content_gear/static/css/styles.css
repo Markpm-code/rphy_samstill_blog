@@ -120,7 +120,7 @@ body{
 
 @media  (max-width:430px) {
     .carousel-container {
-        margin-top: -20px;
+        margin-top: 60%;
     }
     .carousel-inner img {
         border: 3px solid #ff9800;
