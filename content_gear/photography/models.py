@@ -9,12 +9,16 @@ class Post(models.Model):
     content = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+    hearts = models.ManyToManyField(User, related_name='hearted_posts', blank=True)
 
     def __str__(self):
         return str(self.title)
 
     def total_likes(self):
         return self.likes.count()
+
+    def total_hearts(self):
+        return self.hearts.count()
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)

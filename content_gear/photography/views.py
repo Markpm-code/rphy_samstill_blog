@@ -24,6 +24,16 @@ def like_post(request, post_id):
     return redirect('photography_blog')
 
 @login_required
+def heart_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.user in post.hearts.all():
+        post.hearts.remove(request.user)
+    else:
+        post.hearts.add(request.user)
+    return redirect('photography_blog')
+
+
+@login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':

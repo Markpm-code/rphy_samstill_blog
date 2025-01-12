@@ -10,11 +10,17 @@
     <p>{{ post.content }}</p>
     <div>
       <p class="d-inline me-4">Number of Likes: {{ post.total_likes }}</p>
-      <p class="d-inline">Number of Hearts: </p>
+      <p class="d-inline">Number of Hearts: {{ post.total_hearts }}</p>
     </div>
-    <a href="{% url 'like_post' post.id %}">
-        {% if user in post.likes.all %}<i class="fa-solid fa-thumbs-down"></i>{% else %}<i class="fa-solid fa-thumbs-up"></i>{% endif %}
-    </a>
+    <div>
+        <a href="{% url 'like_post' post.id %}" class="me-4">
+            {% if user in post.likes.all %}<i class="fa-regular fa-thumbs-down"></i>{% else %}<i class="fa-regular fa-thumbs-up"></i>{% endif %}
+        </a>
+        <a href="{% url 'heart_post' post.id %}">
+            {% if user in post.hearts.all %}<i class="fa-solid fa-heart-crack"></i>{% else %}<i class="fa-solid fa-heart"></i>{% endif %}
+        </a>
+    </div>
+    
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'add_comment' post.id %}" class="mt-4">
             {% csrf_token %}
@@ -25,8 +31,9 @@
         <p><a href="/login/">Log in</a> to comment.</p>
     {% endif %}
     {% for comment in post.comments.all %}
-        <div style="margin-left:20px;">
+        <div>
             <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
+            <p>Date commented: {{ comment.created_at }}</p>
             {% if comment.user == request.user %}
                 <a href="{% url 'edit_comment' comment.id %}">Edit</a>
                 <form method="post" action="{% url 'delete_comment' comment.id %}" style="display:inline;">
