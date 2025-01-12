@@ -1,8 +1,42 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}Photography{% endblock title %}
-
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Photography{%endblock title %} 
 {% block content %}
+<!-- templates/photography.html -->
+<div class="container-fluid text-center">
+  {% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width:100%; height:auto;">
+    <p>{{ post.content }}</p>
+    <div>
+      <p class="d-inline me-4">Number of Likes: {{ post.total_likes }}</p>
+      <p class="d-inline">Number of Hearts: </p>
+    </div>
+    <a href="{% url 'like_post' post.id %}">
+        {% if user in post.likes.all %}<i class="fa-solid fa-thumbs-down"></i>{% else %}<i class="fa-solid fa-thumbs-up"></i>{% endif %}
+    </a>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'add_comment' post.id %}" class="mt-4">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit">Add Comment</button>
+        </form>
+    {% else %}
+        <p><a href="/login/">Log in</a> to comment.</p>
+    {% endif %}
+    {% for comment in post.comments.all %}
+        <div style="margin-left:20px;">
+            <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
+            {% if comment.user == request.user %}
+                <a href="{% url 'edit_comment' comment.id %}">Edit</a>
+                <form method="post" action="{% url 'delete_comment' comment.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+  {% endfor %}
+</div>
 
 {% endblock content %}
