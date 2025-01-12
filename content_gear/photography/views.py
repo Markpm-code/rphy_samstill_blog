@@ -56,7 +56,7 @@ def edit_comment(request, comment_id):
             return redirect('photography_blog')
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'photography/edit_comment.html', {'form': form})
+    return render(request, 'edit_comment.html', {'form': form})
 
 @login_required
 def delete_comment(request, comment_id):
