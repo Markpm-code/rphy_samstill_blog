@@ -11,7 +11,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="me-4">Save Changes</button>
-        <a href="{% url 'photography_blog' %}">Cancel</a>
+        <button type="submit" class="me-4 btn btn-light">Save Changes</button>
+        <a href="{% url 'photography_blog' %}" class="text-decoration-none btn btn-primary">Cancel</a>
     </form>
  {% endblock content %}
